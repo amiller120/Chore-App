@@ -20,14 +20,16 @@ namespace OrganizationApp.Controllers
         }
         public ActionResult<IEnumerable<ChoreItem>> Index()
         {
-            var chores = _dataContext.choreItems.ToList();
+            var chores = _dataContext.choreItems.Include(chore => chore.AssignedTo).ToList();
 
             return View(chores);
         }
 
         public ActionResult<IEnumerable<ChoreItem>> AddChore(ChoreItem chore)
         {
+            var selectedAssignee = _dataContext.AssignedPerson.Where(x => x.Id == chore.AssignedTo.Id).FirstOrDefault();
             chore.CreatedDate = DateTime.Now;
+            chore.AssignedTo = selectedAssignee;
             _dataContext.choreItems.Add(chore);
             _dataContext.SaveChanges();
             var chores = _dataContext.choreItems.ToList();

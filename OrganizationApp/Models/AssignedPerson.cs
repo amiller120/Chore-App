@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace OrganizationApp.Models
 {
-    public class ChoreItem
+    public class AssignedPerson
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public bool IsComplete { get; set; }
-        public AssignedPerson AssignedTo { get; set; }
+        public ICollection<ChoreItem> Chores { get; set; }
 
+        
     }
 }

@@ -18,10 +18,12 @@ namespace OrganizationApp.ViewComponents
             _dataContext = dataContext;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(ChoreItem chore)
+        public async Task<IViewComponentResult> InvokeAsync(AddChoreViewModel chore)
         {
-                        
-            return View(new ChoreItem { Name = "", AssignedTo = "", IsComplete = false });
+            var listOfPeople = _dataContext.AssignedPerson.ToList();
+            var model = new AddChoreViewModel();
+            model.ListOfChoices.AddRange(listOfPeople);
+            return View(model);
         }
 
         private Task<List<ChoreItem>> GetChoreItems()

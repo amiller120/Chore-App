@@ -17,11 +17,19 @@
             <tbody>
                 @foreach (var chore in Model)
                 {
-                    <tr>
-                        <td>@chore.Name</td>
-                        <td>@chore.AssignedTo</td>
-                        <td>@chore.IsComplete</td>
-                    </tr>
+                <tr>
+                    <td>@chore.Name</td>
+                    @if (chore.AssignedTo != null)
+                    {
+                        <td>@chore.AssignedTo.Name</td>
+                    }
+                    else
+                    {
+                        <td>No one has been assigned this task</td>
+                    }
+
+                    <td>@chore.IsComplete</td>
+                </tr>
                 }
 
             </tbody>
