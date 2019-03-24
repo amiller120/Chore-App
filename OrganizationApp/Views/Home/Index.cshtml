@@ -12,6 +12,7 @@
                     <td>Name</td>
                     <td>Assignee</td>
                     <td>Is Complete?</td>
+                    <td>Details</td>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@
                     }
 
                     <td>@chore.IsComplete</td>
+                    <td><a class="btn btn-primary" asp-action="Details" asp-controller="Home" asp-route-id="@chore.Id">Details</a></td>
                 </tr>
                 }
 

@@ -32,9 +32,15 @@ namespace OrganizationApp.Controllers
             chore.AssignedTo = selectedAssignee;
             _dataContext.choreItems.Add(chore);
             _dataContext.SaveChanges();
-            var chores = _dataContext.choreItems.ToList();
+            var chores = _dataContext.choreItems.Include(x => x.AssignedTo).ToList();
 
-            return View("Index", chores);
+            return RedirectToAction("Index", chores);
+        }
+
+        public ActionResult<ChoreItem> Details(int id)
+        {
+            var chore = _dataContext.choreItems.Include(x => x.AssignedTo).FirstOrDefault(x => x.Id == id);
+            return View(chore);
         }
 
         public IActionResult Privacy()
