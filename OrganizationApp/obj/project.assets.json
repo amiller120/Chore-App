@@ -12160,11 +12160,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\abomb\\source\\repos\\OrganizationApp\\OrganizationApp\\OrganizationApp.csproj",
+      "projectUniqueName": "C:\\Users\\abomb\\Desktop\\Cleaning App\\Organization-Chore-App\\OrganizationApp\\OrganizationApp.csproj",
       "projectName": "OrganizationApp",
-      "projectPath": "C:\\Users\\abomb\\source\\repos\\OrganizationApp\\OrganizationApp\\OrganizationApp.csproj",
+      "projectPath": "C:\\Users\\abomb\\Desktop\\Cleaning App\\Organization-Chore-App\\OrganizationApp\\OrganizationApp.csproj",
       "packagesPath": "C:\\Users\\abomb\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\abomb\\source\\repos\\OrganizationApp\\OrganizationApp\\obj\\",
+      "outputPath": "C:\\Users\\abomb\\Desktop\\Cleaning App\\Organization-Chore-App\\OrganizationApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
