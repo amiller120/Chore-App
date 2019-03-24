@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ChoreItem>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <table id="choreTable">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Assignee</td>
+                    <td>Is Complete?</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var chore in Model)
+                {
+                    <tr>
+                        <td>@chore.Name</td>
+                        <td>@chore.AssignedTo</td>
+                        <td>@chore.IsComplete</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        @await Component.InvokeAsync("AddChore")
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#choreTable").DataTable();
+        });
+    </script>
+}

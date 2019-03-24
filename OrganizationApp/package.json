@@ -1,0 +1,13 @@
+{
+  "name": "OrganizationApp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Adam M",
+  "license": "MIT",
+  "dependencies": {
+    "datatables": "1.10.18",
+    "jquery": "3.3.1",
+    "bootstrap": "4.3.1"
+  },
+  "engines": { "yarn": ">=1.0.0" }
+}

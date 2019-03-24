@@ -1,0 +1,21 @@
+{
+  "systemParams": "win32-x64-57",
+  "modulesFolders": [
+    "wwwroot\\lib"
+  ],
+  "flags": [],
+  "linkedModules": [],
+  "topLevelPatterns": [
+    "bootstrap@4.3.1",
+    "datatables@1.10.18",
+    "jquery@3.3.1"
+  ],
+  "lockfileEntries": {
+    "bootstrap@4.3.1": "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.3.1.tgz#280ca8f610504d99d7b6b4bfc4b68cec601704ac",
+    "datatables@1.10.18": "https://registry.yarnpkg.com/datatables/-/datatables-1.10.18.tgz#fee16e82aa70b17c5faf1a6954ac68f404f33a70",
+    "jquery@3.3.1": "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca",
+    "jquery@>=1.7": "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+  },
+  "files": [],
+  "artifacts": {}
+}
