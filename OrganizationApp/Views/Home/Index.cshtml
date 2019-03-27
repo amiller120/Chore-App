@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ChoreItem>
+﻿@model PagedResult<ChoreItem>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -16,26 +16,30 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var chore in Model)
+                @foreach (var chore in Model.Results)
                 {
-                <tr>
-                    <td>@chore.Name</td>
-                    @if (chore.AssignedTo != null)
-                    {
-                        <td>@chore.AssignedTo.Name</td>
-                    }
-                    else
-                    {
-                        <td>No one has been assigned this task</td>
-                    }
+                    <tr>
+                        <td>@chore.Name</td>
+                        @if (chore.AssignedTo != null)
+                        {
+                            <td>@chore.AssignedTo.Name</td>
+                        }
+                        else
+                        {
+                            <td>No one has been assigned this task</td>
+                        }
 
-                    <td>@chore.IsComplete</td>
-                    <td><a class="btn btn-primary" asp-action="Details" asp-controller="Home" asp-route-id="@chore.Id">Details</a></td>
-                </tr>
+                        <td>@chore.IsComplete</td>
+                        <td><a class="btn btn-primary" asp-action="Details" asp-controller="Home" asp-route-id="@chore.Id">Details</a></td>
+                    </tr>
                 }
 
             </tbody>
         </table>
+        @for (var p = 1; p <= Model.PageCount; p++)
+        {
+            <a href="@Url.Action("Index", new { page = p })" class="btn btn-secondary">@p</a>
+        }
     </div>
     <div class="col-md-6">
         @await Component.InvokeAsync("AddChore")
@@ -44,7 +48,9 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $("#choreTable").DataTable();
+            $("#choreTable").DataTable({
+                "paging": false
+            });
         });
     </script>
 }
