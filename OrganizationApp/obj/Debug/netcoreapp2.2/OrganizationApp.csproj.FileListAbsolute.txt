@@ -61,3 +61,4 @@ C:\Users\abomb\Desktop\Cleaning App\Organization-Chore-App\OrganizationApp\obj\D
 C:\Users\abomb\Desktop\Cleaning App\Organization-Chore-App\OrganizationApp\obj\Debug\netcoreapp2.2\OrganizationApp.Views.pdb
 C:\Users\abomb\Desktop\Cleaning App\Organization-Chore-App\OrganizationApp\obj\Debug\netcoreapp2.2\OrganizationApp.csproj.CopyComplete
 C:\Users\abomb\Desktop\Cleaning App\Organization-Chore-App\OrganizationApp\obj\Debug\netcoreapp2.2\Razor\Views\Home\Details.g.cshtml.cs
+C:\Users\abomb\Desktop\Cleaning App\Organization-Chore-App\OrganizationApp\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\Pager\Default.g.cshtml.cs

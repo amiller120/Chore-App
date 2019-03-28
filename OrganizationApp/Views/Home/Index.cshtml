@@ -36,20 +36,19 @@
 
             </tbody>
         </table>
-        @for (var p = 1; p <= Model.PageCount; p++)
-        {
-            <a href="@Url.Action("Index", new { page = p })" class="btn btn-secondary">@p</a>
-        }
+        @(await Component.InvokeAsync("Pager", Model))
     </div>
     <div class="col-md-6">
         @await Component.InvokeAsync("AddChore")
     </div>
 </div>
 @section Scripts {
+    
     <script>
         $(document).ready(function () {
             $("#choreTable").DataTable({
-                "paging": false
+                "paging": false,
+                "bInfo": false
             });
         });
     </script>
