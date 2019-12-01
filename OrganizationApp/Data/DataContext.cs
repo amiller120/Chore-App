@@ -11,7 +11,7 @@ namespace OrganizationApp.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<ChoreItem> choreItems { get; set; }
+        public DbSet<ChoreItem> ChoreItems { get; set; }
         public DbSet<AssignedPerson> AssignedPerson { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

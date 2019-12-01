@@ -20,7 +20,7 @@ namespace OrganizationApp.Controllers
         }
         public ActionResult<IEnumerable<ChoreItem>> Index(int page=1, int pageSize=10)
         {
-            var chores = _dataContext.choreItems.Include(chore => chore.AssignedTo).GetPaged(page, pageSize);
+            var chores = _dataContext.ChoreItems.Include(chore => chore.AssignedTo).GetPaged(page, pageSize);
 
             return View(chores);
         }
@@ -30,16 +30,16 @@ namespace OrganizationApp.Controllers
             var selectedAssignee = _dataContext.AssignedPerson.Where(x => x.Id == chore.AssignedTo.Id).FirstOrDefault();
             chore.CreatedDate = DateTime.Now;
             chore.AssignedTo = selectedAssignee;
-            _dataContext.choreItems.Add(chore);
+            _dataContext.ChoreItems.Add(chore);
             _dataContext.SaveChanges();
-            var chores = _dataContext.choreItems.Include(x => x.AssignedTo).ToList();
+            var chores = _dataContext.ChoreItems.Include(x => x.AssignedTo).ToList();
 
             return RedirectToAction("Index", chores);
         }
 
         public ActionResult<ChoreItem> Details(int id)
         {
-            var chore = _dataContext.choreItems.Include(x => x.AssignedTo).FirstOrDefault(x => x.Id == id);
+            var chore = _dataContext.ChoreItems.Include(x => x.AssignedTo).FirstOrDefault(x => x.Id == id);
             return View(chore);
         }
 

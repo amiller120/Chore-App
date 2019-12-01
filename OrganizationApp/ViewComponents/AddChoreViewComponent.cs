@@ -29,7 +29,7 @@ namespace OrganizationApp.ViewComponents
 
         private Task<List<ChoreItem>> GetChoreItems()
         {
-            var chores = _dataContext.choreItems.Where(x => x.IsComplete==false).ToListAsync();
+            var chores = _dataContext.ChoreItems.Where(x => x.IsComplete==false).ToListAsync();
             return chores;
         }
     }
