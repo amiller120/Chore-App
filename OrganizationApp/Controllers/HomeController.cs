@@ -18,9 +18,9 @@ namespace OrganizationApp.Controllers
         {
             _dataContext = dataContext;
         }
-        public ActionResult<IEnumerable<ChoreItem>> Index(int page=1)
+        public ActionResult<IEnumerable<ChoreItem>> Index(int page=1, int pageSize=10)
         {
-            var chores = _dataContext.choreItems.Include(chore => chore.AssignedTo).GetPaged(page, 10);
+            var chores = _dataContext.choreItems.Include(chore => chore.AssignedTo).GetPaged(page, pageSize);
 
             return View(chores);
         }
