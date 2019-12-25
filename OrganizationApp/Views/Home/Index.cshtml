@@ -11,7 +11,7 @@
                 <tr>
                     <td>Name</td>
                     <td>Assignee</td>
-                    <td>Is Complete?</td>
+                    <td>Status</td>
                     <td>Details</td>
                 </tr>
             </thead>
@@ -28,8 +28,19 @@
                         {
                             <td>No one has been assigned this task</td>
                         }
-
-                        <td>@chore.IsComplete</td>
+                        @if(@chore.DueDate > DateTime.Now && @chore.DueDate > DateTime.Now.AddDays(4))
+                        {
+                            <td><i class="fa fa-certificate green-icon-color"></i></td>
+                        }
+                        else if(@chore.DueDate > DateTime.Now && @chore.DueDate > DateTime.Now.AddDays(1))
+                        {
+                            <td><i class="fa fa-certificate yellow-icon-color"></i></td>
+                        }
+                        else
+                        {
+                            <td><i class="fa fa-certificate red-icon-color"></i></td>
+                        }
+                        
                         <td><a class="btn btn-primary" asp-action="Details" asp-controller="Home" asp-route-id="@chore.Id">Details</a></td>
                     </tr>
                 }

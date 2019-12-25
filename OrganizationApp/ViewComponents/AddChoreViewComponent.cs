@@ -19,7 +19,7 @@ namespace OrganizationApp.ViewComponents
             _dataContext = dataContext;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(AddChoreViewModel chore)
+        public  IViewComponentResult Invoke(AddChoreViewModel chore)
         {
             var listOfPeople = _dataContext.AssignedPerson.ToList();            
             var model = new AddChoreViewModel();
@@ -29,7 +29,7 @@ namespace OrganizationApp.ViewComponents
 
         private Task<List<ChoreItem>> GetChoreItems()
         {
-            var chores = _dataContext.ChoreItems.Where(x => x.IsComplete==false).ToListAsync();
+            var chores = _dataContext.ChoreItems.ToListAsync();
             return chores;
         }
     }

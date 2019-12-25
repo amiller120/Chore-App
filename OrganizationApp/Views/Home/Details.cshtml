@@ -9,14 +9,27 @@
         <tr>
             <td>Name</td>
             <td>Assignee</td>
-            <td>IsComplete</td>
+            <td>Status</td>
+            <td>Is Complete</td>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>@Model.Name</td>
             <td>@Model.AssignedTo.Name</td>
-            <td>@Model.IsComplete</td>
+            @if(@Model.DueDate > DateTime.Now && @Model.DueDate > DateTime.Now.AddDays(4))
+                        {
+                            <td><i class="fa fa-certificate green-icon-color"></i></td>
+                        }
+                        else if(@Model.DueDate > DateTime.Now && @Model.DueDate > DateTime.Now.AddDays(1))
+                        {
+                            <td><i class="fa fa-certificate yellow-icon-color"></i></td>
+                        }
+                        else
+                        {
+                            <td><i class="fa fa-certificate red-icon-color"></i></td>
+                        }
+            <td><a class="btn btn-success" type="button" asp-route-id="@Model.Id" asp-controller="Home" asp-action="FinishChore">Finished Chore</a></td>
         </tr>
     </tbody>
 </table>

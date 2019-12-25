@@ -19,7 +19,7 @@ namespace OrganizationApp.ViewComponents
             _dataContext = dataContext;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(AddAssignedPersonViewModel chore)
+        public IViewComponentResult Invoke(AddAssignedPersonViewModel chore)
         {
             var model = new AddAssignedPersonViewModel();
             return View(model);

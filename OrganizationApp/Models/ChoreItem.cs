@@ -16,8 +16,6 @@ namespace OrganizationApp.Models
         public DateTime StartDate {get; set;}
 
         public DateTime DueDate {get; set;}
-
-        public bool IsComplete { get; set; }
         
         public AssignedPerson AssignedTo { get; set; }
     }

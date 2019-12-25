@@ -34,6 +34,18 @@ button.accept-policy {
   line-height: inherit;
 }
 
+.green-icon-color{
+  color: green;
+}
+
+.yellow-icon-color{
+  color: yellow;
+}
+
+.red-icon-color{
+  color:red;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

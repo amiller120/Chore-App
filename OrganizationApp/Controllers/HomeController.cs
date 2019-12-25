@@ -48,6 +48,8 @@ namespace OrganizationApp.Controllers
             var selectedAssignee = _dataContext.AssignedPerson.Where(x => x.Id == chore.AssignedTo.Id).FirstOrDefault();
             chore.CreatedDate = DateTime.Now;
             chore.AssignedTo = selectedAssignee;
+            chore.StartDate = DateTime.Now;
+            chore.DueDate = DateTime.Now.AddDays(10);
             _dataContext.ChoreItems.Add(chore);
             _dataContext.SaveChanges();
             var chores = _dataContext.ChoreItems.Include(x => x.AssignedTo).ToList();
@@ -59,6 +61,18 @@ namespace OrganizationApp.Controllers
         {
             var chore = _dataContext.ChoreItems.Include(x => x.AssignedTo).FirstOrDefault(x => x.Id == id);
             return View(chore);
+        }
+
+        public ActionResult<IEnumerable<ChoreItem>> FinishChore(int id)
+        {
+            var chore = _dataContext.ChoreItems.SingleOrDefault(x => x.Id == id);
+            chore.StartDate = DateTime.Now;
+            chore.DueDate = DateTime.Now.AddDays(10);
+            _dataContext.ChoreItems.Update(chore);
+            _dataContext.SaveChanges();
+            var chores = _dataContext.ChoreItems.Include(x => x.AssignedTo).ToList();
+
+            return RedirectToAction("Index", chores);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
