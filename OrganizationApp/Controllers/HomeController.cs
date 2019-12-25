@@ -25,6 +25,24 @@ namespace OrganizationApp.Controllers
             return View(chores);
         }
 
+        [HttpGet]
+        public ActionResult<IEnumerable<AssignedPerson>> AddPerson(int page=1, int pageSize=10)
+        {
+            var people = _dataContext.AssignedPerson.GetPaged(page, pageSize);
+
+            return View(people);
+        } 
+
+        [HttpPost]
+        public ActionResult<AssignedPerson> AddPerson(AssignedPerson person)
+        {
+            _dataContext.AssignedPerson.Add(person);
+            _dataContext.SaveChanges();
+            var people = _dataContext.AssignedPerson.ToList();
+
+            return RedirectToAction("AddPerson", people);
+        }
+
         public ActionResult<IEnumerable<ChoreItem>> AddChore(ChoreItem chore)
         {
             var selectedAssignee = _dataContext.AssignedPerson.Where(x => x.Id == chore.AssignedTo.Id).FirstOrDefault();
@@ -41,11 +59,6 @@ namespace OrganizationApp.Controllers
         {
             var chore = _dataContext.ChoreItems.Include(x => x.AssignedTo).FirstOrDefault(x => x.Id == id);
             return View(chore);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

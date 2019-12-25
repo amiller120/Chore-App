@@ -1,0 +1,41 @@
+@model PagedResult<AssignedPerson>
+@{
+    ViewData["Title"] = "Assigned Person Page";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <table id="choreTable">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var person in Model.Results)
+                {
+                    <tr>
+                        <td>@person.Name</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        @(await Component.InvokeAsync("Pager", Model))
+    </div>
+    <div class="col-md-6">
+        @await Component.InvokeAsync("AddAssignedPerson")
+    </div>
+</div>
+@section Scripts {
+    
+    <script>
+        $(document).ready(function () {
+            $("#choreTable").DataTable({
+                "paging": false,
+                "bInfo": false
+            });
+        });
+    </script>
+}
