@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html class="height-100">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,9 +19,9 @@
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body class="bg-light">
+<body class="height-100">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OrganizationApp</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -41,9 +41,9 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid bg-dark height-100">
         @*<partial name="_CookieConsentPartial" />*@
-        <main role="main" class="pb-3">
+        <main role="main" class="height-100">
             @RenderBody()
         </main>
     </div>
