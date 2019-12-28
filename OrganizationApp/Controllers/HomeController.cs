@@ -65,7 +65,7 @@ namespace OrganizationApp.Controllers
 
         public ActionResult<IEnumerable<ChoreItem>> FinishChore(int id)
         {
-            var chore = _dataContext.ChoreItems.SingleOrDefault(x => x.Id == id);
+            var chore = _dataContext.ChoreItems.Include(x => x.AssignedTo).SingleOrDefault(x => x.Id == id);
             chore.StartDate = DateTime.Now;
             chore.DueDate = DateTime.Now.AddDays(10);
             _dataContext.ChoreItems.Update(chore);
