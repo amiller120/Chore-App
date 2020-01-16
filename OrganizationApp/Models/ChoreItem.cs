@@ -8,7 +8,6 @@ namespace OrganizationApp.Models
 {
     public class ChoreItem
     {
-        [Required(ErrorMessage ="The Id is required when adding a chore.")]
         public int Id { get; set; }
         
         public string Name { get; set; }

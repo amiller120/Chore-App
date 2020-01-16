@@ -5,6 +5,7 @@ using OrganizationApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace OrganizationApp.Controllers
@@ -46,12 +47,20 @@ namespace OrganizationApp.Controllers
         [HttpPost]
         public async Task<ActionResult<ChoreItem>> PostChoreItem(ChoreItem chore)
         {
-            var assigned = _dataContext.AssignedPerson.SingleOrDefault(x => x.Id == chore.AssignedTo.Id);
-            chore.AssignedTo = assigned;
-            _dataContext.ChoreItems.Add(chore);
-            await _dataContext.SaveChangesAsync();
+            if (ModelState.IsValid)
+            {
+                var assigned = _dataContext.AssignedPerson.SingleOrDefault(x => x.Id == chore.AssignedTo.Id);
+                chore.AssignedTo = assigned;
+                _dataContext.ChoreItems.Add(chore);
+                await _dataContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetChoreItem), new { id = chore.Id }, chore);
+                return CreatedAtAction(nameof(GetChoreItem), new { id = chore.Id }, chore);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+            
         }
 
         // PUT: api/chore/{id}
