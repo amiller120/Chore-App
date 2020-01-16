@@ -8,10 +8,10 @@
 <table id="singleChore">
     <thead>
         <tr>
-            <td>Name</td>
-            <td class="hide-row">Assignee</td>
-            <td class="hide-row">Status</td>
-            <td>Is Complete</td>
+            <td class="font-weight-bold">Name</td>
+            <td class="hide-row font-weight-bold">Assignee</td>
+            <td class="hide-row font-weight-bold">Status</td>
+            <td class="font-weight-bold">Is Complete</td>
         </tr>
     </thead>
     <tbody>
@@ -41,7 +41,9 @@
         $(document).ready(function () {
             $("#singleChore").DataTable({
                 dom: 'Bfrt',
-                searching: false
+                searching: false,
+                sorting: false,
+                ordering: false
             });
         });
     </script>

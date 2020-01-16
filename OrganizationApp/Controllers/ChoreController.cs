@@ -24,7 +24,7 @@ namespace OrganizationApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChoreItem>>> GetChoreItems()
         {
-            var chores = await _dataContext.ChoreItems.Include(chore => chore.AssignedTo).ToListAsync();
+            var chores = await _dataContext.ChoreItems.Include(chore => chore.AssignedTo).OrderBy(chore => chore.Id).ToListAsync();
             return chores;
         }
 
@@ -32,7 +32,7 @@ namespace OrganizationApp.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ChoreItem>> GetChoreItem(int id)
         {
-            var choreItem = await _dataContext.ChoreItems.Include(chore => chore.AssignedTo).Where(x => x.Id == id).FirstOrDefaultAsync();
+            var choreItem = await _dataContext.ChoreItems.Include(chore => chore.AssignedTo).Where(x => x.Id == id).SingleOrDefaultAsync();
 
             if (choreItem == null)
             {
@@ -46,7 +46,7 @@ namespace OrganizationApp.Controllers
         [HttpPost]
         public async Task<ActionResult<ChoreItem>> PostChoreItem(ChoreItem chore)
         {
-            var assigned = _dataContext.AssignedPerson.Where(x => x.Id == chore.AssignedTo.Id).FirstOrDefault();
+            var assigned = _dataContext.AssignedPerson.SingleOrDefault(x => x.Id == chore.AssignedTo.Id);
             chore.AssignedTo = assigned;
             _dataContext.ChoreItems.Add(chore);
             await _dataContext.SaveChangesAsync();
