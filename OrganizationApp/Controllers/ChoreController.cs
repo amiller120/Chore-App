@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace OrganizationApp.Controllers
 {
@@ -31,6 +32,9 @@ namespace OrganizationApp.Controllers
 
         // GET: api/Chore/{id}
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<ChoreItem>> GetChoreItem(int id)
         {
             var choreItem = await _dataContext.ChoreItems.Include(chore => chore.AssignedTo).Where(x => x.Id == id).SingleOrDefaultAsync();
@@ -45,12 +49,18 @@ namespace OrganizationApp.Controllers
 
         // POST: api/Chore
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<ChoreItem>> PostChoreItem(ChoreItem chore)
         {
             if (ModelState.IsValid)
             {
                 var assigned = _dataContext.AssignedPerson.SingleOrDefault(x => x.Id == chore.AssignedTo.Id);
                 chore.AssignedTo = assigned;
+                chore.CreatedDate = DateTime.Now;
+                chore.StartDate = DateTime.Now;
+                chore.DueDate = DateTime.Now.AddDays(10);
                 _dataContext.ChoreItems.Add(chore);
                 await _dataContext.SaveChangesAsync();
 
@@ -65,6 +75,10 @@ namespace OrganizationApp.Controllers
 
         // PUT: api/chore/{id}
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> PutChoreItem(int id, ChoreItem chore)
         {
             if (id != chore.Id)
@@ -75,7 +89,23 @@ namespace OrganizationApp.Controllers
             _dataContext.Entry(chore).State = EntityState.Modified;
             await _dataContext.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
+        }
+
+        [HttpPut("finish-chore/{id}")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> FinishChore(int id)
+        {
+            var chore = _dataContext.ChoreItems.Include(x => x.AssignedTo).SingleOrDefault(x => x.Id == id);
+            chore.StartDate = DateTime.Now;
+            chore.DueDate = DateTime.Now.AddDays(10);
+            _dataContext.ChoreItems.Update(chore);
+            await _dataContext.SaveChangesAsync();
+
+            var updatedChore = _dataContext.ChoreItems.SingleOrDefault(x => x.Id == id);
+
+            return Ok(updatedChore);
         }
 
 
