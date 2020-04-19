@@ -1,0 +1,20 @@
+﻿@model RoomViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="bg-light container height-100">
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h4>@Model.Name</h4>
+        @foreach (var chore in Model.Chores)
+        {
+            <div class="media text-muted pt-3">                
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">@chore.Name</strong>
+                </p>
+            </div>
+        }
+    </div>
+</div>

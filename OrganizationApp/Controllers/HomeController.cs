@@ -20,7 +20,7 @@ namespace OrganizationApp.Controllers
         }
         public ActionResult<IEnumerable<ChoreItem>> Index(int page=1, int pageSize=10)
         {
-            var chores = _dataContext.ChoreItems.Include(chore => chore.AssignedTo).GetPaged(page, pageSize);
+            var chores = _dataContext.ChoreItems.Include(chore => chore.AssignedTo).Include(chore => chore.Room).GetPaged(page, pageSize);
 
             return View(chores);
         }
@@ -36,30 +36,60 @@ namespace OrganizationApp.Controllers
         [HttpPost]
         public ActionResult<AssignedPerson> AddPerson(AssignedPerson person)
         {
-            _dataContext.AssignedPerson.Add(person);
-            _dataContext.SaveChanges();
-            var people = _dataContext.AssignedPerson.ToList();
+            if (ModelState.IsValid)
+            {
+                _dataContext.AssignedPerson.Add(person);
+                _dataContext.SaveChanges();
+                var people = _dataContext.AssignedPerson.ToList();
 
-            return RedirectToAction("AddPerson", people);
+                return RedirectToAction("AddPerson", people);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Room>> AddRoom(int page=1, int pageSize = 10)
+        {
+            var rooms = _dataContext.Room.GetPaged(page, pageSize);
+
+            return View(rooms);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRoom(Room room)
+        {
+            if (ModelState.IsValid)
+            {
+                await _dataContext.Room.AddAsync(room);
+                await _dataContext.SaveChangesAsync();
+                var rooms = await _dataContext.Room.ToListAsync();
+
+                return RedirectToAction("AddRoom", rooms);
+            }
+
+            return BadRequest();            
         }
 
         public ActionResult<IEnumerable<ChoreItem>> AddChore(ChoreItem chore)
         {
             var selectedAssignee = _dataContext.AssignedPerson.Where(x => x.Id == chore.AssignedTo.Id).FirstOrDefault();
+            var selectedRoom = _dataContext.Room.FirstOrDefault(x => x.Id == chore.Room.Id);
             chore.CreatedDate = DateTime.Now;
             chore.AssignedTo = selectedAssignee;
+            chore.Room = selectedRoom;
             chore.StartDate = DateTime.Now;
             chore.DueDate = DateTime.Now.AddDays(10);
             _dataContext.ChoreItems.Add(chore);
             _dataContext.SaveChanges();
-            var chores = _dataContext.ChoreItems.Include(x => x.AssignedTo).ToList();
+            var chores = _dataContext.ChoreItems.Include(x => x.AssignedTo).Include(x => x.Room).ToList();
 
             return RedirectToAction("Index", chores);
         }
 
         public ActionResult<ChoreItem> Details(int id)
         {
-            var chore = _dataContext.ChoreItems.Include(x => x.AssignedTo).FirstOrDefault(x => x.Id == id);
+            var chore = _dataContext.ChoreItems.Include(x => x.AssignedTo).Include(x => x.Room).FirstOrDefault(x => x.Id == id);
             return View(chore);
         }
 

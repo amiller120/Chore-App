@@ -9,6 +9,7 @@
         <table id="choreTable" class="cell-border compact stripe">
             <thead>
                 <tr>
+                    <td class="font-weight-bold">Room</td>
                     <td class="font-weight-bold">Name</td>
                     <td class="hide-row font-weight-bold">Assignee</td>
                     <td class="hide-row font-weight-bold">Status</td>
@@ -19,6 +20,7 @@
                 @foreach (var chore in Model.Results)
                 {
                     <tr>
+                        <td>@chore.Room.Name</td>
                         <td>@chore.Name</td>
                         @if (chore.AssignedTo != null)
                         {

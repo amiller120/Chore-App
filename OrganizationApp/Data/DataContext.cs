@@ -13,6 +13,7 @@ namespace OrganizationApp.Data
 
         public DbSet<ChoreItem> ChoreItems { get; set; }
         public DbSet<AssignedPerson> AssignedPerson { get; set; }
+        public DbSet<Room> Room { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,10 +22,15 @@ namespace OrganizationApp.Data
                 .WithMany(c => c.Chores)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<AssignedPerson>()
-                .HasMany(a => a.Chores)
-                .WithOne(a => a.AssignedTo)
+            modelBuilder.Entity<ChoreItem>()
+                .HasOne(c => c.Room)
+                .WithMany(c => c.ChoreItems)
+                .HasForeignKey(c => c.RoomId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Room>()
+                .HasIndex(r => r.Name)
+                .IsUnique();
 
             //modelBuilder.Entity<ChoreItem>().HasData(new { Id = 1, AssignedTo = "Adam", CreatedDate = DateTime.Now, IsComplete = false, Name = "Dishes" });
         }

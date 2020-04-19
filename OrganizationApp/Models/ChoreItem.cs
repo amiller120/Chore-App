@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OrganizationApp.Models
 {
@@ -18,7 +15,12 @@ namespace OrganizationApp.Models
 
         public DateTime DueDate {get; set;}
 
-        [Required(ErrorMessage ="You must have an person assigned to a chore.")]
+        [Required(ErrorMessage ="You must have a person assigned to a chore.")]
         public AssignedPerson AssignedTo { get; set; }
+
+        public int RoomId { get; set; }
+
+        [Required]
+        public Room Room { get; set; }
     }
 }

@@ -8,6 +8,7 @@
 <table id="singleChore">
     <thead>
         <tr>
+            <td class="font-weight-bold">Room</td>
             <td class="font-weight-bold">Name</td>
             <td class="hide-row font-weight-bold">Assignee</td>
             <td class="hide-row font-weight-bold">Status</td>
@@ -16,6 +17,7 @@
     </thead>
     <tbody>
         <tr>
+            <td><a asp-action="Rooms" asp-controller="Room" asp-route-id="@Model.RoomId">@Model.Room.Name</a></td>
             <td>@Model.Name</td>
             <td class="hide-row">@Model.AssignedTo.Name</td>
             @if(@Model.DueDate > DateTime.Now && @Model.DueDate > DateTime.Now.AddDays(4))

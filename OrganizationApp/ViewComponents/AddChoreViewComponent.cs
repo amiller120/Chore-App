@@ -19,11 +19,13 @@ namespace OrganizationApp.ViewComponents
             _dataContext = dataContext;
         }
 
-        public  IViewComponentResult Invoke(AddChoreViewModel chore)
+        public IViewComponentResult Invoke(AddChoreViewModel chore)
         {
-            var listOfPeople = _dataContext.AssignedPerson.ToList();            
+            var listOfPeople = _dataContext.AssignedPerson.ToList();
+            var listOfRooms = _dataContext.Room?.ToList();
             var model = new AddChoreViewModel();
             model.ListOfChoices.AddRange(listOfPeople);
+            model.ListOfRooms.AddRange(listOfRooms);
             return View(model);
         }
 

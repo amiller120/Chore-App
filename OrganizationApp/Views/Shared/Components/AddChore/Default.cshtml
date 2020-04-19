@@ -16,14 +16,22 @@
                 <input asp-for="Chore.Name" value="" />
             </div>
             <div class="form-group">
-                <label>Assingned To</label><br />
+                <label>Assigned To</label><br />
 
                 <select asp-for="Chore.AssignedTo.Id" form="choreForm">
                     @foreach (var item in Model.ListOfChoices)
                     {
                         <option value="@item.Id" >@item.Name</option>
                     }
-
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Rooms</label>
+                <select asp-for="Chore.Room.Id" form="choreForm">
+                    @foreach (var item in Model.ListOfRooms)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
                 </select>
             </div>
 
