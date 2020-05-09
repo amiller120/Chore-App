@@ -48,29 +48,6 @@ namespace OrganizationApp.Controllers
             return BadRequest();
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Room>> AddRoom(int page=1, int pageSize = 10)
-        {
-            var rooms = _dataContext.Room.GetPaged(page, pageSize);
-
-            return View(rooms);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddRoom(Room room)
-        {
-            if (ModelState.IsValid)
-            {
-                await _dataContext.Room.AddAsync(room);
-                await _dataContext.SaveChangesAsync();
-                var rooms = await _dataContext.Room.ToListAsync();
-
-                return RedirectToAction("AddRoom", rooms);
-            }
-
-            return BadRequest();            
-        }
-
         public ActionResult<IEnumerable<ChoreItem>> AddChore(ChoreItem chore)
         {
             var selectedAssignee = _dataContext.AssignedPerson.Where(x => x.Id == chore.AssignedTo.Id).FirstOrDefault();
