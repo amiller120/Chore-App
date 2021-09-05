@@ -80,7 +80,7 @@ namespace OrganizationApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
 
             //app.UseMvc(routes =>
