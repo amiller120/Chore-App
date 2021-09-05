@@ -1,17 +1,55 @@
 {
   "name": "OrganizationApp",
   "version": "1.0.0",
+  "private": true,
+  "author": {
+    "name": "Adam M"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
   "main": "index.js",
-  "author": "Adam M",
-  "license": "MIT",
   "dependencies": {
+    "bootstrap": "4.3.1",
+    "core-js": "^3.6.5",
     "datatables": "1.10.18",
+    "font-awesome": "4.7.0",
     "jquery": "3.5.1",
     "popper.js": "1.14.7",
-    "bootstrap": "4.3.1",
-    "font-awesome": "4.7.0"
+    "vue": "^2.6.11",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
   },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "_id": "OrganizationApp@1.0.0",
   "engines": {
     "yarn": ">=1.0.0"
-  }
+  },
+  "license": "MIT",
+  "readme": "ERROR: No README data found!"
 }
